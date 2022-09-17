@@ -1,3 +1,3 @@
 mkdir -p .go
-GOMODCACHE=.go go build
+GOMODCACHE="$PWD.go" go build
 ./book migrate up
