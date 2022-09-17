@@ -26,7 +26,7 @@
         // authenticate
         client.users.authViaOAuth2(
             provider.name,
-            params.get("code"),
+            searchParams.get("code"),
             provider.codeVerifier,
             'https://book.devazuka.com/redirect.html'
         ).then((authData) => JSON.stringify(authData, null, 2))
