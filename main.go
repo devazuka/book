@@ -5,6 +5,7 @@ import (
     "time"
 
     _ "github.com/devazuka/book/v2/migrations"
+    "github.com/labstack/echo/v5"
 
     "github.com/pocketbase/dbx"
     "github.com/pocketbase/pocketbase"
@@ -34,6 +35,10 @@ func main() {
     var selectBookingsOverlapping *dbx.Query
 
     app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
+
+        // serves static files from the provided public dir (if exists)
+        subFs := echo.MustSubFS(e.Router.Filesystem, "pb_public")
+        e.Router.GET("/*", apis.StaticDirectoryHandler(subFs, false))
 
         selectBookingsOverlapping = app.DB().
             NewQuery(`
