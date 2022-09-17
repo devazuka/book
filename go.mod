@@ -3,6 +3,11 @@ module github.com/devazuka/book/v2
 go 1.18
 
 require (
+	github.com/pocketbase/dbx v1.6.0
+	github.com/pocketbase/pocketbase v0.7.2
+)
+
+require (
 	github.com/AlecAivazis/survey/v2 v2.3.5 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d // indirect
 	github.com/aws/aws-sdk-go v1.44.85 // indirect
@@ -44,8 +49,6 @@ require (
 	github.com/mattn/go-isatty v0.0.16 // indirect
 	github.com/mattn/go-sqlite3 v1.14.15 // indirect
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d // indirect
-	github.com/pocketbase/dbx v1.6.0 // indirect
-	github.com/pocketbase/pocketbase v0.7.2 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/spf13/cobra v1.5.0 // indirect

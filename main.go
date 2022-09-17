@@ -4,6 +4,8 @@ import (
     "log"
     "time"
 
+    _ "github.com/devazuka/book/v2/migrations"
+
     "github.com/pocketbase/dbx"
     "github.com/pocketbase/pocketbase"
     "github.com/pocketbase/pocketbase/apis"
@@ -35,12 +37,12 @@ func main() {
 
         selectBookingsOverlapping = app.DB().
             NewQuery(`
-                SELECT count(*) as count FROM booking
-                WHERE type={:type}
-                  AND until > {:at}
-                  AND at < {:until}
-                LIMIT 2
-            `).Prepare()
+                   SELECT count(*) as count FROM booking
+                   WHERE type={:type}
+                     AND until > {:at}
+                     AND at < {:until}
+                   LIMIT 2
+               `).Prepare()
 
         if selectBookingsOverlapping.LastError != nil {
             return selectBookingsOverlapping.LastError
@@ -94,6 +96,7 @@ func main() {
 
         return nil
     })
+
     if err := app.Start(); err != nil {
         log.Fatal(err)
     }
