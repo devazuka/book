@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>OAuth2 redirect page</title>
+</head>
+<body>
+    <pre id="content">Authenticating...</pre>
+
+    <script type="module">
+        import PocketBase from './script/pb.min.js'
+
+        const client = new PocketBase("https://book.devazuka.com")
+
+        // parse the query parameters from the redirected url
+        const { searchParams } = new URL(window.location)
+
+        // load the previously stored provider's data
+        const provider = JSON.parse(localStorage.getItem('provider'))
+
+        // compare the redirect's state param and the stored provider's one
+        if (provider.state !== searchParams.get("state")) {
+            throw "State parameters don't match."
+        }
+
+        // authenticate
+        client.users.authViaOAuth2(
+            provider.name,
+            params.get("code"),
+            provider.codeVerifier,
+            'https://book.devazuka.com/redirect.html'
+        ).then((authData) => JSON.stringify(authData, null, 2))
+         .catch((err) => "Failed to exchange code.\n" + err)
+         .then(s => document.getElementById("content").innerText = s)
+    </script>
+</body>
+</html>

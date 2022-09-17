@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OAuth2 links page</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+</head>
+<body>
+    <ul id="list">
+        <li>Loading OAuth2 providers...</li>
+    </ul>
+    <script type="module">
+        import PocketBase from './script/pb.min.js'
+
+        const client = new PocketBase("https://book.devazuka.com")
+
+        const authMethods = await client.users.listAuthMethods()
+        const listItems = []
+
+        for (const provider of authMethods.authProviders) {
+            const $li = $(`<li><a>Login with ${provider.name}</a></li>`)
+
+            $li.find("a")
+                .attr("href", provider.authUrl + "https://book.devazuka.com/redirect.html")
+                .data("provider", provider)
+                .click(function () {
+                    // store provider's data on click for verification in the redirect page
+                    localStorage.setItem("provider", JSON.stringify($(this).data("provider")))
+                })
+
+            listItems.push($li)
+        }
+
+        $("#list").html(listItems.length ? listItems : "<li>No OAuth2 providers.</li>")
+    </script>
+</body>
+</html>
