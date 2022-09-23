@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="modulepreload" href="./script/pocketbase.min.js">
+  <title></title>
+<style>
+/* Classless.css v1.0 (Tiny Inline Version)*/
+
+/* Tiny Reset for block elements  */
+* { box-sizing: border-box; border-spacing: 0 }
+header, footer, figure, table, video, details, blockquote,
+ul, ol, dl, fieldset, pre, pre > code, caption, nav {
+  display: block;
+  margin: 0.5rem 0rem 1rem;
+  width: 100%;
+  overflow: auto hidden;
+  text-align: left;
+}
+video, summary, input, select { outline: none }
+html { font: 12pt/1.6 'Open Sans', Helvetica, sans-serif }
+body {
+  position: relative;
+  margin: auto;
+  color: #433;
+  padding: 3.1rem 0.6rem 0;
+  overflow-x: hidden;
+}
+body > footer { margin: 10rem 0rem 0rem }
+
+/* clickable stuff */
+a, summary, button, select { color: #07c }
+a { text-decoration: underline solid #d1d1d1; text-underline-position: under }
+a:hover { color: #088; border-color: #088 }
+
+/* common */
+td, th, pre > code { padding: 0.5rem 0.8rem }
+.card, details { padding: 0 .6rem }
+code, kbd, samp { padding: 0.2rem; font: .9em/1.4 monospace }
+code, kbd, samp, nav, .card { background: #f4f5f6; border-radius: 0.3em }
+kbd, .card, details[open] { border: 1px solid #d1d1d1 }
+td, th, figcaption, caption, .card { font-size: 95% }
+td, th, hr { border: 0; border-bottom: 0.1rem solid #d1d1d1 }
+
+/* lists */
+ul, ol { padding-top: 0.5rem }
+li, dd { margin-bottom: 0.5rem }
+dt { font-weight: bold }
+
+/* headings */
+h1, h2, h3, h4, h5 { margin: 1.5em 0 0em; line-height: 1.2em }
+h1+h2, h2+h3, h3+h4, h4+h5 { margin-top: .5em }
+h1 { font-size: 2.2em; font-weight: 300 }
+h2 { font-size: 2.0em; font-weight: 300; font-variant-caps: small-caps }
+h3 { font-size: 1.5em; font-weight: 400 }
+h4 { font-size: 1.1em; font-weight: 700 }
+h5 { font-size: 1.2em; font-weight: 400; color: #888 }
+h6 { font-size: 1.0em; font-weight: 600; display: inline }
+h6 + p { display: inline }
+
+/* tables */
+td, th { text-align: right; white-space: nowrap }
+td:first-child, th:first-child { text-align: left }
+tr:hover{ background-color: #f4f5f6 }
+
+/* figures */
+img, svg { max-width: 100%; vertical-align: text-top }
+p>img:not(:only-child) { float: right; margin: 0 0 .5em .5em }
+figure > img { display: block; margin: 0.5em auto }
+figcaption, caption { color: #888; margin-bottom: 1rem }
+figure > *:not(:last-child) { margin: 0 0 0.4rem }
+
+/*code*/
+pre > code { margin: 0; border-left: 0.4rem solid #088 }
+
+/* misc */
+blockquote{ border-left: 0.3rem solid #d1d1d1; padding: 1rem 1.5rem; font-style: italic }
+input { font-size: 1em }
+p>cite:before { content: ' (' } p>cite:after {content: ') '}
+
+/* grid */
+.row { display: flex; margin:  0.5rem -0.5rem; align-items: stretch }
+.row [class*="col"] { padding: 0  0.5rem; flex: 1 1 100% }
+@media (max-width: 40em) { .row { flex-direction: column !important } }
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+td.image div {
+  height: 3em;
+  width: 3em;
+  border-radius: 0.5em;
+  overflow: hidden;
+  display: block;
+  background-color: #CCC;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
+td.name {
+  text-transform: capitalize;
+}
+
+#external-data {
+  display: flex;
+  gap: 2em;
+}
+
+</style>
+</head>
+<body>
+  <form id="sign-in" style="display: none">
+    <h2>Sign-in</h2>
+    <label>
+      Email:
+      <input type="email" name="email">
+    </label>
+    <label>
+      Password:
+      <input type="password" name="password">
+    </label>
+    <button type="submit">log-in</button>
+    <pre></pre>
+  </form>
+  <div id="external-data">
+    <div id="stripe">
+      <h3>💵 Stripe <a href="https://book.devazuka.com/_/#/collections?collectionId=ntuuq9ktswwjxse&sort=-at">🔗</a></h3>
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">Name</th>
+            <th>At</th>
+            <th colspan="2">Product</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"></td><td class="status"></td>
+            <td class="at"></td>
+            <td class="product"></td><td class="quantity"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="croissant">
+      <h3>🥐 Croissant <a href="https://book.devazuka.com/_/#/collections?collectionId=csot93jnuofgw27&sort=-at">🔗</a></h3>
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">Name</th>
+            <th colspan="2">At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="image"></td><td class="name"></td>
+            <td class="at"></td><td class="until"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script type="module">
+import PocketBase from './script/pocketbase.min.js'
+const client = new PocketBase('https://book.devazuka.com')
+
+const once = (src, event, opts) => new Promise((resolve, reject) => {
+  src.addEventListener(event, resolve, { once: true, ...opts })
+})
+
+const onFormSubmit = async form => {
+  const event = await once(form, 'submit')
+  event.preventDefault()
+  return Object.fromEntries(new FormData(event.target))
+}
+
+const signInForm = document.getElementById('sign-in')
+const signIn = async () => {
+  if (client.authStore.isValid) return client.authStore.model
+  signInForm.style.display = ''
+  try {
+    const { email, password } = await onFormSubmit(signInForm)
+    signInForm.querySelector('pre').textContent = 'Loading...'
+    signInForm.querySelector('button[type=submit]').disabled = true
+    await client.admins.authViaEmail(email, password)
+    signInForm.style.display = 'none'
+  } catch (err) {
+    console.error(err.stack)
+    signInForm.querySelector('pre').textContent = err.message
+  }
+  signInForm.querySelector('button[type=submit]').disabled = false
+  return signIn()
+}
+const user = await signIn()
+console.log({ user })
+
+const formatDate = date => String(date).slice(5, -7)
+const generateList = async (size, collection, format) => {
+  const recordsCache = new Map()
+  // list latest payments
+  const list = await client.records.getList(collection, 1, size, {
+    // filter: '', // maybe do some filtering like, no failed ?
+    sort: '-at',
+  })
+
+  const trTemplate = document.querySelector(`#${collection} tbody tr`)
+  const tBody = trTemplate.parentNode
+  trTemplate.remove()
+  const createRecordEntry = record => {
+    console.log(record)
+    const tr = trTemplate.cloneNode(true)
+    tr.id = record.id
+    const cache = new Map
+    for (const td of tr.children) {
+      const key = td.className
+      const value = record[key]
+      const formatter = format[key] || String
+      cache.set(key, { value, formatter, td })
+      td.append(formatter(value, record, key))
+    }
+    recordsCache.set(record.id, cache)
+    return tr
+  }
+  const trs = list.items.map(createRecordEntry)
+  tBody.append(...trs)
+  await client.realtime.subscribe(collection, ({ action, record }) => {
+    // new event !
+    if (action === 'update') {
+      // if updated, check if present in the list and update
+      const cache = recordsCache.get(record.id)
+      if (!cache) return
+      for (const [key, { td, formatter, value }] of cache) {
+        if (record[key] === value) continue
+        while (td.firstChild) td.firstChild.remove()
+        td.append(formatter(record[key], record, key))
+        // TODO: add a class to show it just changed ?
+      }
+    } else if (action === 'created') {
+      // if created, push to top, remove last      
+      if (trs.length >= size) {
+        const last = trs.pop()
+        recordsCache.delete(last.id)
+        last.remove()
+      }
+
+      const tr = createRecordEntry(record)
+      trs.unshift(tr)
+      tBody.append(...trs)
+    }
+    // if removed, ignore
+    console.log(event)
+  })
+}
+
+await generateList(15, 'stripe', {
+  status: src => src === 'succeeded' ? '🟢' : '🔴',
+  at: formatDate,
+  product: src => {
+    const pass = src.split(' ').at(-2) || src
+    if (pass === 'Monthly') return 'Month'
+    return pass
+  },
+})
+
+await generateList(10, 'croissant', {
+  image: (src, record) => {
+    const div = document.createElement('div')
+    src || (src = `https://robohash.org/${record.email || record.name}`)
+    div.style.backgroundImage = `url('${src}')`
+    return div
+  },
+  at: formatDate,
+  until: (value, record) => {
+    if (!value) return '🟢'
+    const diff = new Date(value) - new Date(record.at)
+    if (diff < 60000) return Math.floor(diff / 1000) + 's'
+    if (diff < 60*60000) return Math.floor(diff / 60000) + 'm'
+    if (diff < 24*60*60000) return Math.floor(diff / (60*60000)) + 'h'
+    return formatDate(value)
+  },
+})
+
+console.log(client.records)
+
+  </script>
+</body>
+</html>

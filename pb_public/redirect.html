@@ -24,14 +24,20 @@
         }
 
         // authenticate
-        client.users.authViaOAuth2(
-            provider.name,
-            searchParams.get("code"),
-            provider.codeVerifier,
-            'https://book.devazuka.com/redirect.html'
-        ).then((authData) => JSON.stringify(authData, null, 2))
-         .catch((err) => "Failed to exchange code.\n" + err)
-         .then(s => document.getElementById("content").innerText = s)
+        const contentElem = document.getElementById('content')
+        try {
+            const authData = await client.users.authViaOAuth2(
+                provider.name,
+                searchParams.get("code"),
+                provider.codeVerifier,
+                'https://book.devazuka.com/redirect.html'
+            )
+            contentElem.textContent = JSON.stringify(authData, null, 2)
+        } catch (err) {
+            // Should redirect to /index.html ?
+            contentElem.textContent = `Unable to redirect:\n${err.stack}`
+        }
+        console.log(authData)
     </script>
 </body>
 </html>
