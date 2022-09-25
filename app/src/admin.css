@@ -1,0 +1,29 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+td.image div {
+  height: 3em;
+  width: 3em;
+  border-radius: 0.5em;
+  overflow: hidden;
+  display: block;
+  background-color: #CCC;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
+td.name { text-transform: capitalize }
+
+#data table { transition: opacity 300ms }
+#data { display: flex; gap: 2em }
+
+#croissant, #stripe { min-height: 47em }
+#croissant { min-width: 22.3em }
+#stripe { min-width: 26.2em }
+
+body:not([data-page=sign-in]) #sign-in { display: none }
+body:not([data-page=data]) #data { display: none }

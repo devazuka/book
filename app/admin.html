@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="data:image/svg+xml,<svg viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'><path fill='%23fff' stroke='%23888' d='M39,1L20.5,11L20.5,39L39,29Z'/><path fill='%23888' stroke='%23fff' d='M1,1L19.5,11L19.5,39L1,29Z'/></svg>">
+    <title>Admin</title>
+  </head>
+  <body>
+  <form id="sign-in">
+    <h2>Sign-in</h2>
+    <label>
+      Email:
+      <input type="email" name="email">
+    </label>
+    <label>
+      Password:
+      <input type="password" name="password">
+    </label>
+    <button type="submit">log-in</button>
+    <pre></pre>
+  </form>
+  <div id="data">
+    <div id="stripe">
+      <h3>💵 Stripe <a href="https://book.devazuka.com/_/#/collections?collectionId=ntuuq9ktswwjxse&sort=-at">🔗</a></h3>
+      <table style="opacity: 0">
+        <thead>
+          <tr>
+            <th colspan="2">Name</th>
+            <th>At</th>
+            <th colspan="2">Product</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name"></td><td class="status"></td>
+            <td class="at"></td>
+            <td class="product"></td><td class="quantity"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div id="croissant">
+      <h3>🥐 Croissant <a href="https://book.devazuka.com/_/#/collections?collectionId=csot93jnuofgw27&sort=-at">🔗</a></h3>
+      <table style="opacity: 0">
+        <thead>
+          <tr>
+            <th colspan="2">Name</th>
+            <th colspan="2">At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="image"></td><td class="name"></td>
+            <td class="at"></td><td class="until"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="/src/admin.tsx" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "app",
+  "version": "0.0.0",
+  "description": "Booking app for DEVAZUKA",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "license": "MIT",
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "typescript": "^4.8.2",
+    "vite": "^3.0.9",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-html": "^3.2.0",
+    "vite-plugin-singlefile": "^0.12.1",
+    "vite-plugin-solid": "^2.3.0",
+    "vite-plugin-windicss": "^1.8.8",
+    "windicss": "^3.5.6"
+  },
+  "dependencies": {
+    "pocketbase": "^0.7.1",
+    "solid-js": "^1.5.1"
+  }
+}
